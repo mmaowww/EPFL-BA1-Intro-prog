@@ -95,36 +95,51 @@ class Cloture {
             }
         }
 
-        int coteCloture = 0; ; // J'ajoute déjà les clôtures verticales délimitant les lignes, une à gauche, une à droite.
-        for (int j = 0; j < ligne; j++) //Je compte le nombre de clôtures horizontales sur la première ligne.
+        if (colonne == 1) //Si la carte n'a qu'une seule ligne ou une seule case.
         {
-            if (carteModifiee[0][j] == 1)
-                coteCloture++;
-            if (carteModifiee[0][j]== 1 && carteModifiee[1][j] == 0)
-                coteCloture++;
+            int cotePetiteCloture = 2; //C'est les côtés verticaux.
+            for (int j = 0; j < ligne; j++) //Je compte le nombre de clôtures horizontales sur cette seule ligne.
+            {
+                    cotePetiteCloture += 2;
+            }
+            double metrePetiteCloture = cotePetiteCloture * 2.5;
+            System.out.print("Il vous faut " + metrePetiteCloture);
+            System.out.println(" mètres de clôture pour votre terrain.");
         }
-        for (int i = 1; i < colonne - 1; i++) //Je compte le nombre de clôtures horizontales sur les lignes entre la première et la dernières ligne.
+
+        else
         {
-            for (int j = 0; j < ligne; j++) {
-                if (carteModifiee[i][j] == 1 && carteModifiee[i - 1][j] == 0)
+            int coteCloture = 0;
+            ; // J'ajoute déjà les clôtures verticales délimitant les lignes, une à gauche, une à droite.
+            for (int j = 0; j < ligne; j++) //Je compte le nombre de clôtures horizontales sur la première ligne.
+            {
+                if (carteModifiee[0][j] == 1)
                     coteCloture++;
-                if (carteModifiee[i][j] == 1 && carteModifiee[i + 1][j] == 0)
+                if (carteModifiee[0][j] == 1 && carteModifiee[1][j] == 0)
                     coteCloture++;
             }
-        }
-        for (int j = 0; j < ligne; j++) //Je compte le nombre de clôtures horizontales sur la dernière ligne.
-        {
-            if (carteModifiee[colonne - 1][j] == 1)
-                coteCloture++;
-            if (carteModifiee[colonne - 1][j]== 1 && carteModifiee[colonne-2][j] == 0)
-                coteCloture++;
-        }
+            for (int i = 1; i < colonne - 1; i++) //Je compte le nombre de clôtures horizontales sur les lignes entre la première et la dernières ligne.
+            {
+                for (int j = 0; j < ligne; j++) {
+                    if (carteModifiee[i][j] == 1 && carteModifiee[i - 1][j] == 0)
+                        coteCloture++;
+                    if (carteModifiee[i][j] == 1 && carteModifiee[i + 1][j] == 0)
+                        coteCloture++;
+                }
+            }
+            for (int j = 0; j < ligne; j++) //Je compte le nombre de clôtures horizontales sur la dernière ligne.
+            {
+                if (carteModifiee[colonne - 1][j] == 1)
+                    coteCloture++;
+                if (carteModifiee[colonne - 1][j] == 1 && carteModifiee[colonne - 2][j] == 0)
+                    coteCloture++;
+            }
 
-        coteCloture += 2*colonne;
-        double  metreCloture = coteCloture * 2.5;
-        System.out.print("Il vous faut " + metreCloture);
-        System.out.println(" mètres de clôture pour votre terrain.");
-
+            coteCloture += 2 * colonne;
+            double metreCloture = coteCloture * 2.5;
+            System.out.print("Il vous faut " + metreCloture);
+            System.out.println(" mètres de clôture pour votre terrain.");
+        }
 
         /*for (int i = 0; i < colonne; i++) {
             for (int j = 0; j < ligne; j++) {
